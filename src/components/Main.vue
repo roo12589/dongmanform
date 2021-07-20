@@ -1,8 +1,8 @@
 <template>
   <el-container>
-    <el-aside width="350px">
-      <el-row class="tac">
-  <el-col :span="12">
+    <el-aside width="130px">
+<el-row class="tac">
+  <el-col>
     <el-menu
       default-active="1"
       class="el-menu-vertical-demo"
@@ -14,9 +14,9 @@
         <!-- <i class="el-icon-menu"></i> -->
         <span slot="title">分类管理</span>
       </el-menu-item>
-      <el-submenu index="2">
+      <!-- <el-submenu index="2">
         <template slot="title">
-          <!-- <i class="el-icon-location"></i> -->
+          <i class="el-icon-location"></i>
           <span>动漫管理</span>
         </template>
         <el-menu-item-group>
@@ -24,17 +24,10 @@
           <el-menu-item index="1-1">选项1</el-menu-item>
           <el-menu-item index="1-2">选项2</el-menu-item>
         </el-menu-item-group>
-        <el-menu-item-group title="分组2">
-          <el-menu-item index="1-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="1-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="1-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
+      </el-submenu> -->
 
         <el-menu-item index="3" route="/comment">
-        <i class="el-icon-document"></i>
+        <!-- <i class="el-icon-document"></i> -->
         <span slot="title">评论管理</span>
       </el-menu-item>
 
@@ -82,4 +75,10 @@ export default {
 </script>
 
 <style>
+  /* .el-menu-item{
+    text-align: center;
+  }
+  li{
+    text-align: center;
+  } */
 </style>

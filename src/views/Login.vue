@@ -2,7 +2,7 @@
   <div class="login">
     <el-input v-model="user.userName" placeholder="请输入内容" maxlength="16"></el-input>
     <el-input placeholder="请输入密码" v-model="user.userPassword" maxlength="16" show-password></el-input>
-    <el-button type="primary" @click="login">登录</el-button><br>
+    <el-button type="primary" @click="login" round>&nbsp;&nbsp;登录&nbsp;&nbsp;</el-button><br>
     <el-link type="info" @click="toRegister">未登录？去注册</el-link>
 
   </div>

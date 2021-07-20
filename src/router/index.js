@@ -7,6 +7,8 @@ import Main from '../components/Main.vue'
 
 import DongmanManage from '../views/submenu/DongmanManage.vue'
 import CommentManage from '../views/submenu/CommentManage.vue'
+import AnnounceManage from '../views/submenu/AnnounceManage.vue'
+import PVManage from '../views/submenu/PVManage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -29,12 +31,6 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
-    
-  },
-  {
-    path:'/main',
-    name:'main',
-    component:Main,
     children:[
       {
         path:'/dongman',
@@ -46,9 +42,29 @@ const routes = [
         name:'comment',
         component:CommentManage
       },
+      {
+        path:'/pv',
+        name:'pv',
+        component:PVManage
+      },
+      {
+        path:'/announce',
+        name:'announce',
+        component:AnnounceManage
+      },
       // {}
     ]
+    
   },
+  {
+    path:'/main',
+    name:'main',
+    component:Main,
+    
+  },
+  // {
+  //   path:'/'
+  // }
   // {
   //   path: '/about',
   //   name: 'About',

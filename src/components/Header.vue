@@ -2,7 +2,7 @@
   <el-header>
     <el-row>
       <el-col :span="6"><div class="grid-content h100">&nbsp;</div></el-col>
-      <el-col :span="12"><div class="grid-content h100" ><h2>动漫论坛后台管理系统</h2></div></el-col>
+      <el-col :span="12"><div class="grid-content h100" ><h2>动漫论坛后台管理系统{{this.$store.getters.test}}</h2></div></el-col>
       <!-- <el-col :span="6"><div class="grid-content" @click="func"><el-avatar :size="50" :src="circleUrl"></el-avatar><span>{{userName}}<i class="el-icon-caret-bottom"></i></span></div></el-col> -->
       <el-col :span="6"><div class="grid-content h100">
           <el-dropdown trigger="click">
@@ -34,7 +34,7 @@ export default {
 };
 </script>
 
-<style lang='scss'>
+<style lang='scss' scoped>
 body {
   margin: 0;
   padding: 0;
@@ -46,7 +46,7 @@ h2 {
 span {
   float: left;
   font-size: 18px;
-  line-height: 56px;
+  line-height: 55px;
   margin: 0 5px;
   /* line-height: 72px; */
   /* display: flex;
@@ -58,7 +58,7 @@ span {
   background-color: rgb(233, 240, 240);
   // color: rgb(101, 222, 228);
   color: #555;
-  margin-bottom: 5px;
+  margin: 5px 0;
 }
 .el-avatar{
   margin-top: 7.5px;
