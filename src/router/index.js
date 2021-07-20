@@ -3,7 +3,10 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
+import Main from '../components/Main.vue'
 
+import DongmanManage from '../views/submenu/DongmanManage.vue'
+import CommentManage from '../views/submenu/CommentManage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -25,7 +28,26 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: Home
+    component: Home,
+    
+  },
+  {
+    path:'/main',
+    name:'main',
+    component:Main,
+    children:[
+      {
+        path:'/dongman',
+        name:'dongman',
+        component:DongmanManage
+      },
+      {
+        path:'/comment',
+        name:'comment',
+        component:CommentManage
+      },
+      // {}
+    ]
   },
   // {
   //   path: '/about',
