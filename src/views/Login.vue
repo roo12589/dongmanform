@@ -32,7 +32,7 @@
             show-password
           ></el-input></el-form-item
       ></el-tooltip>
-      <el-button type="primary" @click="login" round
+      <el-button type="primary" @click="handleLogin()" round
         >&nbsp;&nbsp;登录&nbsp;&nbsp;</el-button
       ><br />
       <el-link type="info" @click="toRegister">未登录？去注册</el-link>
@@ -46,7 +46,7 @@ export default {
   name: "Login",
   data() {
     const loginInfo = {
-      username: "admin",
+      username: "admin123",
       password: "123123",
     };
     return {
@@ -56,7 +56,7 @@ export default {
           {
             required: true,
             trigger: "blur",
-            message:"请输入用户名"
+            message: "请输入用户名",
           },
           {
             min: 6,
@@ -64,7 +64,6 @@ export default {
             message: "长度在 6 到 18 个字符",
             trigger: "blur",
           },
-
         ],
         password: [
           {
@@ -107,7 +106,7 @@ export default {
       this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
     },
     handleLogin() {
-      this.$refs.loginInfo.validate((valid) => {
+      /* this.$refs.loginInfo.validate((valid) => {
         if (valid) {
           this.loading = true;
           this.$store
@@ -118,6 +117,10 @@ export default {
                 query: this.otherQuery,
               });
               this.loading = false;
+              // ElMessage.success("登录成功");
+              this.$message({ message: "登录成功", type: "success" });
+              // 此处admin应替换为userInfo.role
+              localStorage.setItem("ms_username", "admin");
             })
             .catch(() => {
               this.loading = false;
@@ -126,7 +129,12 @@ export default {
           console.log("error submit!! ==login");
           return false;
         }
-      });
+      }); */
+      this.$router.push("/home");
+      this.$message({ message: "登录成功", type: "success" });
+              // 此处admin应替换为userInfo.role
+      localStorage.setItem("role","admin");
+      
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {

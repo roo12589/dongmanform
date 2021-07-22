@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
+import v404 from '../views/404.vue'
 // import Main from '../components/Main.vue'
 
 import DongmanManage from '../views/submenu/DongmanManage.vue'
@@ -17,11 +18,10 @@ import PosterManage from '../views/submenu/PosterManage.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  // {
-  //   path: '/',
-  //   name: 'Login',
-  //   component: Login
-  // },  
+  {
+    path: '/',
+    redirect: '/login'
+  },  
   {
     path: '/login',
     name: 'Login',
@@ -62,10 +62,20 @@ const routes = [
         name:'poster',
         component:PosterManage
       },
+
       // {}
     ]
     
   },
+  {
+    path:'/404',
+    name:'404',
+    component:v404
+  },
+  {
+    path:'*',
+    redirect:'/404'
+  }
   // {
   //   path:'/main',
   //   name:'main',
