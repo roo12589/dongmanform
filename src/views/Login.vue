@@ -1,41 +1,149 @@
 <template>
   <div class="login">
-    <el-input v-model="user.userName" placeholder="请输入内容" maxlength="16"></el-input>
-    <el-input placeholder="请输入密码" v-model="user.userPassword" maxlength="16" show-password></el-input>
-    <el-button type="primary" @click="login" round>&nbsp;&nbsp;登录&nbsp;&nbsp;</el-button><br>
-    <el-link type="info" @click="toRegister">未登录？去注册</el-link>
-
+    <h2>登录</h2>
+    <el-form
+      ref="loginInfo"
+      :model="loginInfo"
+      :rules="rules"
+      class="login-form"
+    >
+      <el-form-item prop="username">
+        <el-input
+          v-model="loginInfo.username"
+          placeholder="请输入用户名"
+          name="username"
+          ref="username"
+          tabindex="1"
+        ></el-input
+      ></el-form-item>
+      <el-tooltip
+        v-model="capsTooltip"
+        content="Caps lock is On"
+        placement="right"
+        manual
+      >
+        <el-form-item prop="password"
+          ><el-input
+            placeholder="请输入密码"
+            v-model="loginInfo.password"
+            name="password"
+            ref="password"
+            tabindex="2"
+            show-password
+          ></el-input></el-form-item
+      ></el-tooltip>
+      <el-button type="primary" @click="login" round
+        >&nbsp;&nbsp;登录&nbsp;&nbsp;</el-button
+      ><br />
+      <el-link type="info" @click="toRegister">未登录？去注册</el-link>
+    </el-form>
   </div>
 </template>
 
 <script>
-  import router from '../router'
+import router from "../router";
 export default {
   name: "Login",
-  data(){
-    const user = {
-      userName:"admin",
-      userPassword:"123123"
-    }
+  data() {
+    const loginInfo = {
+      username: "admin",
+      password: "123123",
+    };
     return {
-      user
-    }
+      loginInfo,
+      rules: {
+        username: [
+          {
+            required: true,
+            trigger: "blur",
+            message:"请输入用户名"
+          },
+          {
+            min: 6,
+            max: 18,
+            message: "长度在 6 到 18 个字符",
+            trigger: "blur",
+          },
+
+        ],
+        password: [
+          {
+            required: true,
+            trigger: "blur",
+          },
+        ],
+      },
+      //？
+      capsTooltip: false,
+      showDialog: false,
+      redirect: undefined,
+      otherQuery: {},
+    };
   },
-  methods:{
-    login(){
-      router.push({path:"/home"})
+  watch: {
+    $route: {
+      handler: function (route) {
+        const query = route.query;
+        if (query) {
+          this.redirect = query.redirect;
+          this.otherQuery = this.getOtherQuery(query);
+        }
+      },
+      immediate: true,
     },
-    toRegister(){
-      router.push({path:"/register"})
-    }
-  }
+  },
+  methods: {
+    login() {
+      console.log("try to login");
+
+      // router.push({ path: "/home" });
+    },
+    toRegister() {
+      router.push({ path: "/register" });
+    },
+    //?
+    checkCapslock(e) {
+      const { key } = e;
+      this.capsTooltip = key && key.length === 1 && key >= "A" && key <= "Z";
+    },
+    handleLogin() {
+      this.$refs.loginInfo.validate((valid) => {
+        if (valid) {
+          this.loading = true;
+          this.$store
+            .dispatch("user/login", this.loginInfo)
+            .then(() => {
+              this.$router.push({
+                path: this.redirect || "/dashboard",
+                query: this.otherQuery,
+              });
+              this.loading = false;
+            })
+            .catch(() => {
+              this.loading = false;
+            });
+        } else {
+          console.log("error submit!! ==login");
+          return false;
+        }
+      });
+    },
+    getOtherQuery(query) {
+      return Object.keys(query).reduce((acc, cur) => {
+        if (cur !== "redirect") {
+          acc[cur] = query[cur];
+        }
+        return acc;
+      }, {});
+    },
+  },
 };
 </script>
 
 <style lang='scss'>
-  .login {
-  width: 500px;
-  margin: 0 auto;
+.login {
+  width: 350px;
+  margin: 200px auto 0;
   padding: 15px 20px;
   border: 1px solid rgb(228, 216, 216);
   border-radius: 5px;

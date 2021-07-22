@@ -14,7 +14,7 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>修改信息</el-dropdown-item>
-              <el-dropdown-item>退出系统</el-dropdown-item>
+              <el-dropdown-item ><a @click="logout">退出系统</a></el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </div></el-col
@@ -31,6 +31,18 @@ export default {
       circleUrl: "../assets/ark.png", //本地相对路径图片无效 需要在线图片？
     };
   },
+  methods:{
+    logout () {
+      this.$store.dispatch('user/logout')
+      this.$router.push('/login')
+      this.$message({
+        message: '退出成功',
+        type: 'success',
+        duration: 3 * 1000
+      })
+    }
+
+  }
 };
 </script>
 

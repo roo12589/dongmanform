@@ -81,7 +81,10 @@
         >
 
         <el-form-item>
-          <el-button type="primary" round @click="submitForm('registerInfo')"
+          <el-button
+            type="primary"
+            round
+            @click="handleRegister('registerInfo')"
             >&nbsp;&nbsp;注册&nbsp;&nbsp;</el-button
           >
           <el-button @click="resetForm('registerInfo')">重置</el-button>
@@ -126,7 +129,7 @@ export default {
       } else {
         const reg = /^1[3|5|7|8|9][0-9]{9}$/;
         if (reg.test(value)) {
-          callback;
+          callback();
         } else {
           return callback(new Error("请输入正确的手机号码"));
         }
@@ -152,8 +155,17 @@ export default {
             message: "长度在 6 到 18 个字符",
             trigger: "blur",
           },
+          //添加正则验证
         ],
-        password: [{ validator: validatePass, trigger: "blur" }],
+        password: [
+          { validator: validatePass, trigger: "blur" },
+          {
+            min: 6,
+            max: 18,
+            message: "长度在 6 到 18 个字符",
+            trigger: "blur",
+          },
+        ],
         passwordCheck: [{ validator: validatePass2, trigger: "blur" }],
         phonenumber: [
           {
@@ -179,23 +191,25 @@ export default {
             trigger: "change",
           },
         ],
-        birthday:[
+        birthday: [
           {
-            required:true,
-            message:"请填写出生日期"
-          }
-        ]
+            required: true,
+            message: "请填写出生日期",
+          },
+        ],
       },
     };
   },
   methods: {
-    submitForm(formName) {
+    handleRegister(formName) {
       this.$refs[formName].validate((valid) => {
+        console.log(valid);
         if (valid) {
           // 通过表单验证，执行下一步操作
+          // console.log(valid);
           alert("submit!");
         } else {
-          console.log("error submit!!");
+          console.error("error submit!!");
           return false;
         }
       });
