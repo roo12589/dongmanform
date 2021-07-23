@@ -22,19 +22,19 @@ export default {
     };
   },
   methods: {
-    sleep(ms){
-      return new Promise(resolve=>setTimeout(resolve,ms));
+    sleep(ms) {
+      return new Promise((resolve) => setTimeout(resolve, ms));
     },
     async goBack() {
       this.loading = true;
-      await this.$options.methods.sleep(500)
+      await this.$options.methods.sleep(500);
       this.$router.go(-1);
       // this.loading = false;
     },
     async goLogin() {
       this.loading = true;
-      await this.$options.methods.sleep(500)
-      this.$router.push({path:"/login"})
+      await this.$options.methods.sleep(500);
+      this.$router.push({ path: "/login" });
     },
   },
 };

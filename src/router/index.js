@@ -68,6 +68,7 @@ const routes = [
     
   },
   {
+    // 组件及组件名不能全为数字，用v404代替 其他不变
     path:'/404',
     name:'404',
     component:v404

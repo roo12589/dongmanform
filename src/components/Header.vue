@@ -2,14 +2,14 @@
   <el-header>
     <el-row>
       <el-col :span="6"><div class="grid-content h100">&nbsp;</div></el-col>
-      <el-col :span="12"><div class="grid-content h100" ><h2>动漫论坛后台管理系统{{this.$store.getters.test}}</h2></div></el-col>
-      <!-- <el-col :span="6"><div class="grid-content" @click="func"><el-avatar :size="50" :src="circleUrl"></el-avatar><span>{{userName}}<i class="el-icon-caret-bottom"></i></span></div></el-col> -->
+      <el-col :span="12"><div class="grid-content h100" ><h2>动漫论坛后台管理系统</h2></div></el-col>
+      <!-- <el-col :span="6"><div class="grid-content" @click="func"><el-avatar :size="50" :src="circleUrl"></el-avatar><span>{{username}}<i class="el-icon-caret-bottom"></i></span></div></el-col> -->
       <el-col :span="6"><div class="grid-content h100">
           <el-dropdown trigger="click">
             <span class="el-dropdown-link">
               <el-avatar :size="45" :src="circleUrl"></el-avatar
               ><span
-                >{{ userName }}<i class="el-icon-arrow-down el-icon--right"></i
+                >{{ username }}<i class="el-icon-arrow-down el-icon--right"></i
               ></span>
             </span>
             <el-dropdown-menu slot="dropdown">
@@ -27,7 +27,7 @@
 export default {
   data() {
     return {
-      userName: "admin",
+      username: "admin",
       circleUrl: "../assets/ark.png", //本地相对路径图片无效 需要在线图片？
     };
   },

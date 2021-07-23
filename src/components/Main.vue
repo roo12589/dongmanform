@@ -81,4 +81,7 @@ export default {
   li{
     text-align: center;
   } */
+  main.el-main{
+    padding: 10px;
+  }
 </style>
