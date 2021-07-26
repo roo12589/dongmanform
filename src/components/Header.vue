@@ -2,9 +2,14 @@
   <el-header>
     <el-row>
       <el-col :span="6"><div class="grid-content h100">&nbsp;</div></el-col>
-      <el-col :span="12"><div class="grid-content h100" ><h2>动漫论坛后台管理系统</h2></div></el-col>
+      <el-col :span="12"
+        ><div class="grid-content h100">
+          <h2>动漫论坛后台管理系统</h2>
+        </div></el-col
+      >
       <!-- <el-col :span="6"><div class="grid-content" @click="func"><el-avatar :size="50" :src="circleUrl"></el-avatar><span>{{username}}<i class="el-icon-caret-bottom"></i></span></div></el-col> -->
-      <el-col :span="6"><div class="grid-content h100">
+      <el-col :span="6"
+        ><div class="grid-content h100">
           <el-dropdown trigger="click">
             <span class="el-dropdown-link">
               <el-avatar :size="45" :src="circleUrl"></el-avatar
@@ -14,7 +19,9 @@
             </span>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>修改信息</el-dropdown-item>
-              <el-dropdown-item ><a @click="logout">退出系统</a></el-dropdown-item>
+              <el-dropdown-item
+                ><a @click="handleLogout">退出系统</a></el-dropdown-item
+              >
             </el-dropdown-menu>
           </el-dropdown>
         </div></el-col
@@ -31,18 +38,18 @@ export default {
       circleUrl: "../assets/ark.png", //本地相对路径图片无效 需要在线图片？
     };
   },
-  methods:{
-    logout () {
-      this.$store.dispatch('user/logout')
-      this.$router.push('/login')
+  methods: {
+    handleLogout() {
+      this.$store.dispatch("user/logout");
+      localStorage.removeItem("token");
+      this.$router.push("/login");
       this.$message({
-        message: '退出成功',
-        type: 'success',
-        duration: 3 * 1000
-      })
-    }
-
-  }
+        message: "退出成功",
+        type: "success",
+        duration: 3 * 1000,
+      });
+    },
+  },
 };
 </script>
 
@@ -72,14 +79,14 @@ span {
   color: #555;
   margin: 5px 0;
 }
-.el-avatar{
+.el-avatar {
   margin-top: 7.5px;
 }
 .el-dropdown-link {
   cursor: pointer;
 }
 
-h100{
+h100 {
   height: 100%;
 }
 </style>

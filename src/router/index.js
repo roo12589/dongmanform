@@ -11,7 +11,7 @@ import CommentManage from '../views/submenu/CommentManage.vue'
 import AnnounceManage from '../views/submenu/AnnounceManage.vue'
 import PVManage from '../views/submenu/PVManage.vue'
 import PosterManage from '../views/submenu/PosterManage.vue'
-
+import UserManage from '../views/submenu/UserManage.vue'
 // import NProgress from 'nprogress' // 进度条
 // import 'nprogress/nprogress.css' // 进度条样式
 // import { getToken } from '@/utils/auth' // 从cookie获取token
@@ -21,7 +21,7 @@ const routes = [
   {
     path: '/',
     redirect: '/login'
-  },  
+  },
   {
     path: '/login',
     name: 'Login',
@@ -36,52 +36,57 @@ const routes = [
     path: '/home',
     name: 'Home',
     component: Home,
-    children:[
+    children: [
       {
-        path:'/dongman',
-        name:'dongman',
-        component:DongmanManage
+        path: '/dongman',
+        name: 'dongman',
+        component: DongmanManage
       },
       {
-        path:'/comment',
-        name:'comment',
-        component:CommentManage
+        path: '/comment',
+        name: 'comment',
+        component: CommentManage
       },
       {
-        path:'/pv',
-        name:'pv',
-        component:PVManage
+        path: '/pv',
+        name: 'pv',
+        component: PVManage
       },
       {
-        path:'/announce',
-        name:'announce',
-        component:AnnounceManage
+        path: '/announce',
+        name: 'announce',
+        component: AnnounceManage
       },
       {
-        path:'/poster',
-        name:'poster',
-        component:PosterManage
+        path: '/poster',
+        name: 'poster',
+        component: PosterManage
+      },
+      {
+        path: '/User',
+        name: 'User',
+        component: UserManage
       },
 
       // {}
     ]
-    
+
   },
   {
     // 组件及组件名不能全为数字，用v404代替 其他不变
-    path:'/404',
-    name:'404',
-    component:v404
+    path: '/404',
+    name: '404',
+    component: v404
   },
   {
-    path:'*',
-    redirect:'/404'
+    path: '*',
+    redirect: '/404'
   }
   // {
   //   path:'/main',
   //   name:'main',
   //   component:Main,
-    
+
   // },
   // {
   //   path:'/'
@@ -101,38 +106,63 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-// router.beforeEach((to, from, next) => {
-//   // 路由跳转前拦截
-//     const token = getToken()
-//     if (!token && to.path !== '/login') {
-//       next({
-//         name: 'login'
-//       })
-//       NProgress.done()
-//     } else {
-//       next()
-//       NProgress.done()
-//     }
-    // 登录之后即可获取token值
-    // const hasToken = getToken()
-    // console.log('.....', hasToken)
-    // if (hasToken) {
-    //   console.log('执行了----1', to.path)
-    //   if (to.fullpath === '/login') {
-    //     console.log('执行了')
-    //     next({path: '/dashboard'})
-    //   }
-    // } else {
-    //   console.log('.......')
-    //   if (whiteList.indexOf(to.path) !== -1) {
-    //     // 在免费登录白名单，直接去
-    //     next()
-    //   } else {
-    //     // 没有访问权限的其他页面被重定向到登录页面。
-    //     next(`/login?redirect=${to.path}`)
-    //     // NProgress.done()
-    //   }
-    // }
-  // })
+router.beforeEach((to, from, next) => {
+  // 登录前检查token， 不存在则进入login
+  const token = localStorage.getItem("token");
+  if (!token && to.path !== '/login') {
+    next({ path: '/login' })
+  } else {
+    next()
+  }
+  // 存在token则，再次登录进入home
+  if (token) {
+    if (to.fullPath === '/login') {
+      // this.$message("您已登录，请勿重复登录")
+      next({ path: '/home' })
+    } else {
+      /*       if (whiteList.indexOf(to.path) !== -1) {
+              // 在免费登录白名单，直接去
+              next()
+            } else {
+              // 没有访问权限的其他页面被重定向到登录页面。
+              next(`/login?redirect=${to.path}`)
+              // NProgress.done()
+            } */
+    }
+  }
+})
+/* router.beforeEach((to, from, next) => {
+  // 路由跳转前拦截
+    const token = getToken()
+    if (!token && to.path !== '/login') {
+      next({
+        name: 'login'
+      })
+      NProgress.done()
+    } else {
+      next()
+      NProgress.done()
+    }
+// 登录之后即可获取token值
+const hasToken = getToken()
+console.log('.....', hasToken)
+if (hasToken) {
+  console.log('执行了----1', to.path)
+  if (to.fullpath === '/login') {
+    console.log('执行了')
+    next({path: '/dashboard'})
+  }
+} else {
+  console.log('.......')
+  if (whiteList.indexOf(to.path) !== -1) {
+    // 在免费登录白名单，直接去
+    next()
+  } else {
+    // 没有访问权限的其他页面被重定向到登录页面。
+    next(`/login?redirect=${to.path}`)
+    // NProgress.done()
+  }
+}
+}) */
 
 export default router

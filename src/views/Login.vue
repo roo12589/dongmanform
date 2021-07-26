@@ -92,11 +92,6 @@ export default {
     },
   },
   methods: {
-    login() {
-      console.log("try to login");
-
-      // router.push({ path: "/home" });
-    },
     toRegister() {
       router.push({ path: "/register" });
     },
@@ -130,11 +125,10 @@ export default {
           return false;
         }
       }); */
+      localStorage.setItem("token", "admin");
       this.$router.push("/home");
       this.$message({ message: "登录成功", type: "success" });
-              // 此处admin应替换为userInfo.role
-      localStorage.setItem("role","admin");
-      
+      // 此处admin应替换为userInfo.role
     },
     getOtherQuery(query) {
       return Object.keys(query).reduce((acc, cur) => {
