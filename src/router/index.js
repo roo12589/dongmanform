@@ -5,13 +5,16 @@ import Register from '../views/Register.vue'
 import Home from '../views/Home.vue'
 import v404 from '../views/404.vue'
 // import Main from '../components/Main.vue'
-
+/* 管理页面 */
 import DongmanManage from '../views/submenu/DongmanManage.vue'
 import CommentManage from '../views/submenu/CommentManage.vue'
 import AnnounceManage from '../views/submenu/AnnounceManage.vue'
 import PVManage from '../views/submenu/PVManage.vue'
 import PosterManage from '../views/submenu/PosterManage.vue'
 import UserManage from '../views/submenu/UserManage.vue'
+/* 前台页面 */
+import StartPage from '../views/front/StartPage.vue'
+import DongmanDetail from '../views/front/DongmanDetail.vue'
 // import NProgress from 'nprogress' // 进度条
 // import 'nprogress/nprogress.css' // 进度条样式
 // import { getToken } from '@/utils/auth' // 从cookie获取token
@@ -24,17 +27,17 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login
   },
   {
     path: '/register',
-    name: 'Register',
+    name: 'register',
     component: Register
   },
   {
     path: '/home',
-    name: 'Home',
+    name: 'home',
     component: Home,
     children: [
       {
@@ -64,7 +67,7 @@ const routes = [
       },
       {
         path: '/User',
-        name: 'User',
+        name: 'user',
         component: UserManage
       },
 
@@ -81,17 +84,20 @@ const routes = [
   {
     path: '*',
     redirect: '/404'
+  },
+  /* 
+  前台部分
+  */
+  {
+    path: '/start',
+    name: 'start',
+    component: StartPage
+  },
+  {
+    path:'/dongmandetail',
+    name:'dongmanDetail',
+    component:DongmanDetail
   }
-  // {
-  //   path:'/main',
-  //   name:'main',
-  //   component:Main,
-
-  // },
-  // {
-  //   path:'/'
-  // }
-  // {
   //   path: '/about',
   //   name: 'About',
   //   // route level code-splitting
